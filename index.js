@@ -8,11 +8,13 @@ require('./services/passport')
 
 
 const authRoutes = require('./routes/authRoutes')
+const homepageRoutes = require('./routes/homepage')
 
 mongoose.connect(keys.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true})
 
 const app = express();
 
+app.set('view engine','ejs')
 app.use(
    cookieSession({
       maxAge: 30*24*60*60*1000,
@@ -22,6 +24,7 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
+homepageRoutes(app);
 authRoutes(app);
 
 const PORT = process.env.PORT || 5000;
