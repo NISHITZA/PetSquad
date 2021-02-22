@@ -24,7 +24,7 @@ passport.use(new GoogleStrategy(
         proxy: true
     }, 
     (accessToken, refreshToken, profile, done)=>{
-        User.findOne({ googleId: profile.id })
+        User.findOne({ email: profile._json.email })
             .then((existingUser)=>{
                 if(existingUser){
                     //profile is present
@@ -32,7 +32,12 @@ passport.use(new GoogleStrategy(
                 }
                 else{
                     //profile is not present (new user)
-                    new User({ googleId: profile.id }).save()
+                    new User({ 
+                        googleId: profile.id,
+                        name: profile.name.givenName,
+                        email: profile._json.email,
+                    })
+                        .save()
                         .then(user=> done(null, user))
                 }
             })

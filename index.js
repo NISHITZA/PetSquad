@@ -4,6 +4,7 @@ const keys = require('./config/keys')
 const cookieSession = require('cookie-session')
 const passport = require('passport')
 require('./models/User')
+require('./models/Blog')
 require('./services/passport')
 
 
