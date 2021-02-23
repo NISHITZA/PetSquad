@@ -10,6 +10,7 @@ require('./services/passport')
 
 const authRoutes = require('./routes/authRoutes')
 const homepageRoutes = require('./routes/homepage')
+const blogRoutes = require('./routes/blog')
 
 mongoose.connect(keys.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
 
@@ -25,8 +26,9 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
-homepageRoutes(app);
-authRoutes(app);
+homepageRoutes(app)
+authRoutes(app)
+blogRoutes(app)
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);
