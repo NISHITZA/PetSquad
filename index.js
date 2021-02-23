@@ -11,7 +11,7 @@ require('./services/passport')
 const authRoutes = require('./routes/authRoutes')
 const homepageRoutes = require('./routes/homepage')
 
-mongoose.connect(keys.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(keys.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
 
 const app = express();
 
