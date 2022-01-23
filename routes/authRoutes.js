@@ -9,7 +9,7 @@ module.exports = (app) =>{
     app.get('/auth/google/callback', passport.authenticate('google',
         {
             failureRedirect:'/',
-            successRedirect:'/loginSuccess'
+            successRedirect:'/surveys'
         })
     );
 
@@ -19,10 +19,10 @@ module.exports = (app) =>{
 
     app.get('/api/logout', (req,res)=>{
         req.logout()
-        res.send(req.user)
+        res.redirect('/')
     })
 
-    app.get('/loginSuccess', (req,res)=>{
-        res.render('../frontend/auth/googleSuccess.ejs')
-    })
+    // app.get('/loginSuccess', (req,res)=>{
+    //     res.render('../frontend/auth/googleSuccess.ejs')
+    // })
 }
