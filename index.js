@@ -10,11 +10,13 @@ require('./services/passport')
 
 const authRoutes = require('./routes/authRoutes')
 const homepageRoutes = require('./routes/homepage')
+const billingRoutes = require('./routes/billingRoutes')
 
 mongoose.connect(keys.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true})
 
 const app = express();
 
+app.use(express.json())
 app.set('view engine','ejs')
 app.use(
    cookieSession({
@@ -25,8 +27,10 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
+
 homepageRoutes(app);
 authRoutes(app);
+billingRoutes(app);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);
